@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|PT+Serif:400,400i,700,700i|Source+Code+Pro|Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>Data Viz Lab</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet">
+
+  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+  <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+  <!-- highcharts and mathjax scripts -->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/highcharts-more.js"></script>
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+    <!-- Intro con titolo e immagine. Inserire immagine in /media/ con il nome cover.png
+    Al posto dei segna posto aggiungere il vostro nome e matricola negli <span> -->
+      <div class="intro">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 text">
+              <h5 class="text-center">UNIMIB - 2017/2018</h5>
+              <h1 class="text-center">SPOTIWHY: Gli ingredienti di una HIT di Spotify</h1>
+              <h4 class="text-center">Un progetto di 
+                <span class="name">Marta Borghesio (821922)</span>, 
+                <span class="name">Valentina Manzo (818568)</span>, 
+                <span class="name">Davide Meloni (834333)</span>,  
+                <span class="name">Alberto Raimondi (771357)</span> e
+                <span class="name">Silvia Santamaria (789541)</span></h5>
+              </div>
+          </div>
+          </div>
+      </div>
+
+
+
+      <!-- Primo blocco di testo -->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <h5>Che cos'è Spotify</h5>
+            <p>Esiste ancora qualcuno che nel 2018 ascolta la musica facendo partire i “cari e vecchi cd” dal proprio music player? Sicuramente ci sono ancora molti nostalgici, ma ormai si sa, con l’avvento di internet e dell’era digitale, anche la fruizione musicale si è trasferita on-line, grazie a servizi che permettono di accedere a una quantità pressoché illimitata di musica ovunque ci si trovi, gratis e in ogni momento.</p>
+            <p>Spotify è l’esempio principe di tale cambiamento: offre lo streaming di un catalogo di oltre 15 milioni di brani di varie case discografiche ed etichette indipendenti, inclusi giganti come Sony, EMI, Warner Music Group e Universal. Lanciato nell'Ottobre 2008 dalla startup svedese Spotify AB, il servizio raggiunge gli oltre 75 milioni di utenti nel giugno 2015.  Il 14 settembre 2016 vengono raggiunti i 40 milioni di utenti paganti, acquisendo in soli sei mesi 10 milioni di abbonati.
+			Spotify è disponibile nella maggior parte dei paesi dell'Europa, nella quasi totalità delle Americhe, in Australia e Nuova Zelanda, in Sud Africa e in alcuni paesi dell'Asia.
+            </p>
+            <img src="media/spotify world.png">
+            <p>Il servizio è fruibile attraverso tutti i principali sistemi operativi desktop e mobile. Prevede due tipologie di utenze: 
+            <ul>
+            <li>Free: costituisce il servizio gratuito di base, già disponibile al momento della sottoscrizione al servizio con la quale l'utente può ascoltare una quantità illimitata di musica, ma con inserzioni pubblicitarie.
+			</li>
+            <li>Premium: servizio a pagamento che consente di ascoltare musica senza interruzioni pubblicitarie e permette di accedere ad ulteriori funzioni.
+            </li> 
+            </ul>
+			<p>La musica può essere visualizzata per artista, album, etichetta, genere o playlist ma anche attraverso delle ricerche dirette per canzone. Quotidianamente viene rilasciata una classifica globale con le canzoni più ascoltate sulla piattaforma.
+			Questo lavoro nasce con lo scopo di identificare le caratteristiche che permettono ad una canzone di diventare una HIT di successo. Si sono quindi considerate le proprietà prettamente tecniche delle canzoni, ma anche le peculiarità del cantante stesso. Queste informazioni potrebbero essere molto importanti per gli artisti, poiché se una canzone è presente in una classifica di Spotify aumentano le possibilità che un altro utente la ascolti e quindi anche le possibilità per il cantante di guadagnare di più. Inoltre le classifiche costituiscono una fotografia di quello che le persone ascoltano nella vita di tutti i giorni.
+	            </p>
+	            <p>La prima domanda a cui si è cercato di dare una risposta è: quali sono state le canzoni più ascoltate del 2017 e che quindi si sono posizionate tra i primi posti della classifica globale? In che genere musicale possono essere collocate?
+				Si è quindi trattato di estrarre da Spotify l’elenco di tutte le canzoni che nel 2017 sono apparse nella classifica globale ed il numero degli ascolti ad esse relativo. Queste informazioni hanno quindi dato vita alla seguente visualizzazione che mostra come gli ascolti associati alle singole canzoni aumentino o diminuiscano nel corso dei diversi mesi dell’anno. Infine si sono considerati gli ascolti totali relativi alle prime 50 canzoni in classifica per avere una visione generale dell’uso di Spotify.
+	            </p>
+            </div>
+        </div>
+      </div>
+
+
+      <!-- Prima Visualizzazione -->
+      <div class="container viz">
+        <div class="row">
+         <div class='tableauPlaceholder' id='viz1521847517939' style='position: relative;margin:auto;'><noscript><a href='#'><img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Vi&#47;Viz1_78&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Viz1_78&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Vi&#47;Viz1_78&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1521847517939');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1100px';vizElement.style.height='927px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>          <!-- Incollare qui l'embed della visualizzazione o inserire l'immagine tramite <img src="media/nomefile.jpg">
+          Largezza consigliata per le immagini o per gli embed 1140px per 700px-->
+        </div>
+      </div>
+
+
+
+
+      <!-- Secondo blocco di testo -->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+           <p>“Shape of you” di Ed Sheeran è sicuramente la canzone che ha collezionato il maggior numero di ascolti di tutto il 2017 e ha occupato il primo posto della classifica per mesi fino all’arrivo del vero tormentone dell’estate: “Despacito” di Luis Fonsi. In un solo mese ha raggiunto la vetta della classifica, per poi scendere pian piano di posizione sul finire dell’estate. Come “Despacito” anche altre canzoni hanno raggiunto il successo nei mesi estivi per poi lasciare la classifica rapidamente. Infatti a cavallo del mese di Agosto e Settembre si nota come molte canzoni escano dalla classifica per essere rimpiazzate da nuove canzoni. 
+			I generi più ascoltati del 2017 sono sicuramente il pop, dominato da Ed Sheeran e da Zayn con ben due hit di successo a testa, e l’elettro-pop di artisti come DJ Khaled e Dua Lipa. 
+			Una curiosità? Guardate che canzone sale in classifica velocemente e ha un picco a Dicembre: “All I want for Christmas is you” di Mariah Carey è l’unica canzone che ha più di vent’anni presente in classifica e si conferma il classico natalizio più amato dal pubblico.
+			Infine guardiamo l’andamento generale degli ascolti (delle prime 50 canzoni più ascoltate)
+			su Spotify nell’anno: si vede chiaramente che la voglia di ascoltare musica è maggiore soprattutto nei mesi caldi, mentre in inverno tra scuola e lavoro cala un po’. Una cosa da osservare è l’aumento di ascolti tra Marzo e Maggio, momento in cui l’offerta studenti di Spotify viene estesa ad altri 33 paesi.
+			</p>
+            <p>Abbiamo visto le canzoni che ci hanno accompagnato nel 2017, ma dietro ogni HIT che tipo di artista si cela, con quali caratteristiche?
+			Per trovare una risposta a questa domanda si è considerato il Paese di provenienza, il sesso, il genere musicale e l’anno in cui è stato rilasciato il primo singolo o album degli artisti che sono comparsi nelle prime 15 posizioni della classifica globale. A differenza della precedente visualizzazione la classifica è aggiornata giornalmente. Si è quindi considerato anche il numero di giorni in cui la canzone è rimasta in classifica associando quindi un peso diverso in base alla permanenza. 
+
+            </p>
+            
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Seconda Visualizzazione -->
+      <div class="container viz">
+        <div class="row">
+         <div class='tableauPlaceholder' id='viz1521841245285' style='position: relative;margin:auto;'><noscript><a href='#'><img alt='Quali caratteristiche ti aiutano a diventare un artista di successo? ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sp&#47;Spotify2_0&#47;Story&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Spotify2_0&#47;Story' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sp&#47;Spotify2_0&#47;Story&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1521841245285');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1016px';vizElement.style.height='991px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>          <!-- Incollare qui l'embed della visualizzazione o inserire l'immagine tramite <img src="media/nomefile.jpg">
+          Largezza consigliata per le immagini o per gli embed 1140px per 700px-->
+        </div>
+      </div>
+
+
+
+
+      <!-- Terzo blocco di testo -->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <p>La maggior parte delle posizioni in classifica è di gran lunga occupata da cantanti di genere maschile. Le uniche donne ad aver raggiunto la prima posizione sono state Taylor Swift con “Look what you made me do” e Mariah Carey con la sua hit di Natale. Di grandissimo successo sono stati anche i singoli di Dua Lipa e Camilla Cabello che sono rimaste al secondo posto per molti mesi. Le donne e le band occupano un numero di posizioni in classifica simile, in percentuale circa il 13%. Tra le diverse band solo i The Chainsmokers hanno raggiunto la seconda posizione con ben tre HIT di successo.
+			</p>
+            <p>Per quanto riguarda il Paese di provenienza, a dominare la classifica sono senza dubbio gli artisti nordamericani, ed in particolare provenienti dagli Stati Uniti, seguiti dagli artisti europei, soprattutto britannici. Le prime due posizioni vedono una grossa presenza sudamericana grazie a Luis Fonsi dal Puerto Rico, J Balvin dalla Colombia e Camilla Cabello da Cuba. Nessun artista italiano è riuscito a entrare in classifica, invece ci è riuscito un solo africano, French Montana dal Marocco con il singolo “Unforgettable”. In classifica troviamo anche un’artista australiana, Starley con “Call on me”.
+            </p>
+            <p>Infine vediamo quanto influisca il numero di anni in cui un artista è presente sul mercato: artisti emergenti o artisti conosciuti da tempo? 
+			La maggior parte degli artisti in classifica ha pubblicato il primo singolo tra il 2000 e il 2009, ma anche gli artisti emergenti che hanno pubblicato il primo singolo dopo il 2010 occupano quasi il 33% delle posizioni. 
+			Al contrario gli artisti sul mercato da diversi anni sembra facciano più fatica a rimanere competitivi, infatti gli artisti che hanno pubblicato il primo singolo tra il 1990 e il 1999 occupano solo il 9.36% delle posizioni. Tra questi troviamo Luis Fonsi e DJ Khaled che hanno occupato le prime posizioni per molti mesi. Tra i cantanti in classifica con le carriere più lunghe troviamo Shakira, David Guetta e Eminem, che producono ancora HIT di grande successo rimanendo tuttora competitivi sul mercato musicale. Interessante è notare come nel periodo natalizio compaiano vere e proprie “oldies”, per cui ritornano in voga artisti come Frank Sinatra, Bing Crosby, Brenda Lee e la regina del Natale Mariah Carey. Quindi forse un segreto per diventare un artista immortale è scrivere una canzone di Natale!
+            </p>
+            <p>
+            L’ultima visualizzazione permette di soffermarsi su alcune proprietà che contraddistinguono le canzoni e in particolare si sono considerate misure tecniche quali acousticness, danceability, energy, valence e, infine, la durata della traccia. Queste proprietà sono assegnate da Spotify e calcolate con degli algoritmi proprietari. Per questa indagine il campione considerato è stato esteso a tutte le canzoni comparse per almeno un giorno nella classifica globale delle prime 50 canzoni.
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Terza Visualizzazione -->
+      <div class="container viz">
+        <div class="row">
+         <div class='tableauPlaceholder' id='viz1521841408678' style='position: relative;margin:auto;'><noscript><a href='#'><img alt='Quali caratteristiche ha una canzone di successo? ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sp&#47;Spotify_propriet&#47;Story&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Spotify_propriet&#47;Story' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Sp&#47;Spotify_propriet&#47;Story&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1521841408678');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1016px';vizElement.style.height='1091px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script> 
+		 <!-- Incollare qui l'embed della visualizzazione o inserire l'immagine tramite <img src="media/nomefile.jpg">
+          Largezza consigliata per le immagini o per gli embed 1140px per 700px-->
+        </div>
+      </div>
+
+
+
+
+      <!-- Quarto blocco di testo con le conlusioni-->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <p><ul>
+            	<li>Acousticness: rappresenta il grado di suoni più o meno acustici presenti nella canzone: per esempio, una canzone con un’alta acousticness contiene suoni provenienti da chitarra, piano, voce e orchestra. Al contrario invece, una canzone con suoni più elettronici sarà caratterizzata da una bassa acousticness. Vediamo subito che la maggior parte delle HIT di Spotify sono poco acustiche, in media hanno un valore di 0,22, e i generi più acustici sono prevedibilmente soundtrack e christmas.
+            	</li>
+            	<li>
+            		Danceability: è il grado di danzabilità di una canzone e si nota come la maggior parte delle canzoni sia caratterizzata da valori alti per questa misura, con un valore medio di 0,65. La canzone più ballabile del 2017 è “Peek a Boo” di Lil Yachty.
+            	</li>
+            	<li>
+            		Energy: consiste nel livello di energia prodotto da una canzone e così come per la danceability, la maggior parte delle canzoni ha valori alti, in media 0,64. Probabilmente il pubblico di Spotify richiede soprattutto canzoni per ballare e divertirsi con gli amici. 
+            	</li>
+            	<li>
+            		Valence: è il grado di positività presente in ogni canzone, è legata quindi al mood e stabilisce quanto una canzone è più o meno “felice”. Da questa infografica non sembra che la positività sia una caratteristica determinante nel successo di una canzone, infatti si distribuiscono più o meno equamente tra più tristi e più allegre. Tra le canzoni più positive non ci sorprende trovare molte HIT di Natale e la canzone felice per antonomasia, “Happy” di Pharrell Williams.
+            	</li>
+            	<li>Durata: anche la durata di una canzone è un elemento importante. Un singolo non deve essere troppo breve ma nemmeno troppo lungo. La maggior parte delle canzoni si attesta intorno ad un durata di poco più di 3 minuti. Sono molto poche le canzoni di successo più lunghe di 5 minuti e sono principalmente colonne sonore e canzoni rock. La canzone più breve, invece, dura solo 30 secondi ed è di genere rap. 	
+            	</li>
+            </ul> 
+			
+			
+			
+</p>
+            <p>Siamo ora in grado di delineare l’identikit della HIT del 2017 di Spotify.</p>
+          <img src="media/identikit.png"> 
+          </div>
+        </div>
+      </div>
+      
+      <!-- Quarto blocco di testo -->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <p>Dall'integrazione delle informazioni estratte dalle diverse fonti è possibile delineare il profilo del cantante di successo. Non esiste una formula perfetta ma spetta al cantante stesso decidere che ruolo ricoprire nel panorama musicale. 
+			</p>
+            <p>Il periodo in cui una canzone viene pubblicata incide molto sul numero di ascolti. In estate le canzoni latino americane sembrano avere il sopravvento sulle altre. Nel resto dell'anno i cantanti anglofoni sono i protagonisti indiscussi delle canzoni ascoltate su Spotify.
+			</p>
+           <p>Si è notato che gli utenti di Spotify sembrano attenti alle novità e quindi prediligono cantanti emergenti. Il pop è il genere musicale che caratterizza la maggior parte degli artisti di successo. 
+			</p>
+           <p>Anche le canzoni dovrebbero rispettare alcune caratteristiche per essere facilmente apprezzate dagli utenti di Spotify. Inanzitutto dovrebbero essere vivaci ed orecchiabili con valori alti di danceability ed energy. Inoltre l'artista non dovrebbe annoiare gli utenti con una traccia molto lunga ma 3 minuti sembrano il tempo ideale per lasciare il segno. 
+			</p>
+          </div>
+        </div>
+      </div>
+            
+       
+
+
+
+
+      <div class="howTo">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-md-offset-2">
+              
+              <!-- In questa parte descrivere il processo di raccolta, pulizia e visualizzazione dei dati. Che tipo di dati avevo? Che tipo di operazioni sono state effettuate per poter visualizzare i dati. Come si leggono le visualizzazioni?-->
+              <h5>Note Metodologiche</h5>
+              <h4>FONTI</h4>
+              <p>I dati utilizzati per le visualizzazioni sono stati estratti principalmente dal sito di <a href="https://www.spotify.com/it/">Spotify</a>. In particolare è stato possibile ricavare la classifica globale giornaliera con il numero di ascolti relativo alle singole canzoni. Si sono ricavate tutte le misurazioni quali acousticness, danceability, energy, valence, durata e genere musicale. Per quest'ultimo Spotify ne rilascia un elenco per tutti quelli associabili ai diversi artisti. Nel caso in cui i generi musicali fossero più di uno, si è considerato quello più ricorrente rispetto alle altre canzoni. Il sesso ed il Paese di provenienza sono informazioni che si sono ricavate da Wikipedia.
+				</p>
+				<p>Una volta integrati i diversi dati sono stati inseriti in un database, MongoDB. Questo ci ha permesso di avere a disposizione numerose informazioni circa le singole canzoni e i loro interpreti. 
+				</p>
+              <h4>PRIMA VISUALIZZAZIONE</h4>
+              <p>In questa visualizzazione si è calcolato il numero di ascolti che ha ricevuto una canzone in un determinato mese in percentuale, cioè rispetto al totale degli ascolti delle prime 50 canzoni in classifica. </p>
+              <h4>SECONDA VISUALIZZAZIONE</h4>
+              <p>Per realizzare l’istogramma con il conteggio delle diverse modalità si è considerato l’intervallo di confidenza al 95% calcolato con la seguente formula: 
+                    $$CI = p \pm z\sqrt{\frac{p(1-p)}{n}}$$
+               </p>
+               <h4>TERZA VISUALIZZAZIONE</h4>
+              <p>Per realizzare il jitter plot si è introdotto un rumore casuale che ha permesso di visualizzare contemporaneamente canzoni con stessi valori delle diverse proprietà considerate. 
+               </p>
+              <hr>
+
+              <!-- Seguire indicazioni prof Cabitza. Aggiungere immagini con taf img se necessario-->
+              
+              <h5>Euristiche considerate</h5>
+              <p>La principale euristica che abbiamo utilizzato per la creazione delle visualizzazioni è il “visual information-seeking mantra” [Shneiderman, 1996]:</p>
+              <ol>
+              	<li><b>Overview first</b>: in tutte le visualizzazioni è possibile avere una panoramica d'insieme dei dati utilizzati.</li>
+              	<li><b>Zoom and filter</b>: gli utenti possono selezionare gli elementi di loro interesse. Per esempio nella terza visualizzazione è possibile filtrare per genere e ricavare le statistiche relative al sottogruppo.</li>
+              	<li><b>Details-on-demand</b>: è possibile selezionare una canzone o un artista secondo alcune caratteristiche di interesse.</li>
+              	<li><b>History</b>: tutte le visualizzazioni presentano il tasto reset in basso a destra, così che l'utente possa sempre ritornare allo stato iniziale della visualizzazione.</li>
+              </ol>
+
+              <hr>
+
+              <h5>Test Utente</h5>
+              <p>Per ciascuna visualizzazione si è preparato un questionario composto da quattro domande, che è stato somministrato a un campione di 12 soggetti. Per rispondere gli utenti hanno dovuto interrogare le tre visualizzazioni utilizzando i diversi filtri. Per esempio, nella seconda visualizzazione si è chiesto loro di individuare l'unico artista africano in classifica; nella terza hanno dovuto utilizzare il filtro per fare un confronto fra i diversi generi. 
+             	</p>
+				<h4>RISULTATI</h4>
+             <!--visualizzazioni tempo e punteggio!-->
+             <p> VIOLON PLOT!!!!!!!! TEST?????
+			 </p>
+			 <p> La gran parte degli utenti è riuscita a rispondere correttamente ai task richiesti. Questo test ha confermato il fatto che le informazioni veicolate dalle nostre infografiche siano chiare e abbastanza intuitive. 
+			 L'unica domanda che ha comportato degli errori è quella relativa alla terza visualizzazione, dove 3 persone su 12 sono incorse in errore scambiando le dimensioni degli assi.  
+			 </p>
+
+              <hr>
+
+              <h5>Questionari psicometrici</h5>
+              <p>Per i questionari psicometrici è stata utilizzata la scala Cabitza-Locoro (Locoro et al.2017, Computers in Human Behavior), in cui si chiede alle persone di valutare una visualizzazione per il grado di utilità, intuitività, chiarezza, informatività, bellezza e per il valore di qualità complessivo da loro percepito su una scala da 1 a 6.
+              Sono stati sottoposti tre questionari a un campione di 39 persone, divisi tra coloro che usano Spotify raramente (ovvero quasi mai o mensilmente) e coloro che lo utilizzano spesso (ovvero settimanalmente o quotidianamente).
+              </p>
+              <h4>RISULTATI</h4>
+              <!--visualizzazioni risposte!-->
+              
+              <img src="media/snake1.png" height="500" width="650" style="margin: auto;padding:10px">
+              <img src="media/snake2.png"height="500" width="650" style="margin:auto;padding:10px">
+              <img src="media/snake3.png"height="500" width="650" style="margin: auto;padding:10px">
+            
+              <div id="highc1" style="min-width: 310px; height: 400px; margin: 10px"></div>
+              <div id="highc2" style="min-width: 310px; height: 400px; margin: 10px"></div>
+              <div id="highc3" style="min-width: 310px; height: 400px; margin: 10px "></div>
+            
+              <p>
+
+              </p>
+              <p>Si è condotto un test formale sulla domanda relativa alla qualità complessiva della visualizzazione per verificare se esiste una differenza tra le risposte dei due gruppi. Le risposte si sono considerate in forma binarizzata: da 1 a 3 come risposta negativa, da 4 a 6 come risposta positiva. Si è quindi condotto il test di Fisher a una coda da cui non è emersa una differenza statisticamente significativa tra i due gruppi, infatti il p-value associato al test è pari a 0.33.
+			</p>
+			<p>La stessa cosa è stata fatta per la seconda visualizzazione e anche in questo caso non è emersa una differenza significativa tra i due gruppi, infatti il p-value associato al test è pari a 0.11.
+			</p>
+			<p> Per la terza visualizzazione le risposte negative sono in numero troppo limitato per cui non ha senso effettuare alcun test.</p>
+			<p>Infine considerando complessivamente i questionari psicometrici relativi alle diverse infografiche, si è costruito un modello statistico per spiegare il punteggio dato complessivamente alla visualizzazione in funzione del punteggio assegnato ad utilità, chiarezza, bellezza, intuitività ed informatività.
+			</p>
+			<p>Come si nota dalla matrice delle correlazioni !!!!!!!!!!!!!!!!!!!!!(MATRICE DELLE CORRELAZIONI) !!!!!!!!!!! chiarezza ed intuitività sono due variabili strettamente correlate tra di loro (correlazione pari a 0.917). Per evitare di incorrere in problemi di collinearità la variabile chiarezza è stata esclusa. 
+			</p> <p> Il modello risultante è il seguente:</p>
+			
+			<p> $$Voto\; complessivo = 2.03 + 0.03*Utile + 0.47*Intuitiva + 0.03*Informativa + 0.08*Bella $$</p>
+			
+			<p>Si noti come tutte le variabili siano legate in modo diretto con la variabile risposta (Voto complessivo) ma solo la variabile relativa all'intuitività è statisticamente significativa. Quindi un'infografica per gli utenti deve essere in primo luogo intuitiva per essere giudicata positivamente.  
+			L' $$R^2$$ relativo al modello è pari a 0.6352 per tanto si conclude che tale rappresentazione della realtà sia piuttosto soddisfacente.  
+			 </p>
+
+              </div>
+
+
+
+
+
+
+            <!-- Inserire i link di google spreadsheet/drive o i link ai file dentro la cartella data (ridotti possibilmente - max 5mb) al posto di # e dare un nome ai dataset.-->
+            <div class="col-md-3 col-md-offset-1 howToSide">
+            <h5>Dati utilizzati</h5>
+            <p><a href="data/spotiwhy.rar">Spotiwhy</a></p>
+            
+
+            <!-- Inserire i link agli strumenti utilizzati per la gestione dei dati e per la visualizzazione-->
+            <h5 id="tools">Strumenti utilizzati</h5>
+            <p><a href="https://www.tableau.com/">Tableau</a></p>
+            <p><a href="https://www.adobe.com/it/products/illustrator.html">Adobe Illustrator</a></p>
+            <p><a href="https://www.python.org/">Python</a></p>
+            <p><a href="https://www.mongodb.com/it">mongoDB</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /#page-content-wrapper -->
+
+
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+  <script src="js/bootstrap.min.js"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="js/ie10-viewport-bug-workaround.js"></script>
+  <script>$(document).ready(function () {
+    var trigger = $('.hamburger'),
+    overlay = $('.overlay'),
+    isClosed = false;
+
+    trigger.click(function () {
+      hamburger_cross();
+    });
+
+    function hamburger_cross() {
+
+      if (isClosed == true) {
+        overlay.hide();
+        trigger.removeClass('is-open');
+        trigger.addClass('is-closed');
+        isClosed = false;
+      } else {
+        overlay.show();
+        trigger.removeClass('is-closed');
+        trigger.addClass('is-open');
+        isClosed = true;
+      }
+    }
+
+    $('[data-toggle="offcanvas"]').click(function () {
+      $('#wrapper').toggleClass('toggled');
+    });
+  });
+  </script>
+  <script src="js/highcharts1.js"></script>
+  <script src="js/highcharts2.js"></script>
+  <script src="js/highcharts3.js"></script>
+
+</body>
+</html>
